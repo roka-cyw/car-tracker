@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const TractorGrid = styled.div`
+const VehicleGrid = styled.div`
   display: grid;
   gap: 1.5rem;
   grid-template-columns: 1fr;
@@ -10,7 +10,7 @@ const TractorGrid = styled.div`
   }
 `
 
-const TractorCard = styled.div`
+const VehicleCard = styled.div`
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
@@ -24,25 +24,25 @@ const TractorCard = styled.div`
   }
 `
 
-const TractorHeader = styled.div`
+const VehicleHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1rem;
 `
 
-const TractorInfo = styled.div`
+const VehicleInfo = styled.div`
   flex: 1;
 `
 
-const TractorName = styled.h3`
+const VehicleName = styled.h3`
   font-size: 1.25rem;
   font-weight: 600;
   color: #111827;
   margin: 0 0 0.25rem 0;
 `
 
-const TractorModel = styled.p`
+const VehicleModel = styled.p`
   color: #6b7280;
   font-size: 0.9rem;
   margin: 0;
@@ -106,12 +106,12 @@ const ActionButton = styled.button`
 `
 
 export {
-  TractorGrid,
-  TractorCard,
-  TractorHeader,
-  TractorInfo,
-  TractorName,
-  TractorModel,
+  VehicleGrid,
+  VehicleCard,
+  VehicleHeader,
+  VehicleInfo,
+  VehicleName,
+  VehicleModel,
   StatusBadge,
   TractorDetails,
   ActionButton

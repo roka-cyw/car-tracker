@@ -2,12 +2,12 @@ import { useLocation } from 'wouter'
 
 import { Container, Title, Subtitle } from '../styles/pages/home/HomePage.styles'
 import {
-  TractorGrid,
-  TractorCard,
-  TractorHeader,
-  TractorInfo,
-  TractorName,
-  TractorModel,
+  VehicleGrid,
+  VehicleCard,
+  VehicleHeader,
+  VehicleInfo,
+  VehicleName,
+  VehicleModel,
   StatusBadge,
   ActionButton
 } from '../styles/pages/home/VehicleCard.styles'
@@ -30,16 +30,16 @@ const HomePage = () => {
       <Title>Car's list</Title>
       <Subtitle>Select available car for tracking</Subtitle>
 
-      <TractorGrid>
+      <VehicleGrid>
         {vehiclesData.map(vehicle => (
-          <TractorCard key={vehicle.id} $available={vehicle.status === 'available'}>
-            <TractorHeader>
-              <TractorInfo>
-                <TractorName>{vehicle.name}</TractorName>
-                <TractorModel>Model: {vehicle.model}</TractorModel>
-              </TractorInfo>
+          <VehicleCard key={vehicle.id} $available={vehicle.status === 'available'}>
+            <VehicleHeader>
+              <VehicleInfo>
+                <VehicleName>{vehicle.name}</VehicleName>
+                <VehicleModel>Model: {vehicle.model}</VehicleModel>
+              </VehicleInfo>
               <StatusBadge $color={getStatusColor(vehicle.status)}>{getStatusText(vehicle.status)}</StatusBadge>
-            </TractorHeader>
+            </VehicleHeader>
 
             <ActionButton
               {...getButtonProps(vehicle.status)}
@@ -48,9 +48,9 @@ const HomePage = () => {
             >
               {getButtonText(vehicle.status)}
             </ActionButton>
-          </TractorCard>
+          </VehicleCard>
         ))}
-      </TractorGrid>
+      </VehicleGrid>
     </Container>
   )
 }
