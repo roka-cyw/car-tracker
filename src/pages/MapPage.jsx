@@ -1,8 +1,10 @@
-export default function MapPage() {
+const MapPage = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h1>Map</h1>
-      <p>Map of cars moving</p>
+      <p>Vehicle traffic map</p>
     </div>
   )
 }
+
+export default MapPage
