@@ -40,9 +40,9 @@ export const getButtonText = status => {
 export const getButtonProps = status => {
   switch (status) {
     case 'available':
-      return { primary: true }
+      return { $primary: true }
     case 'working':
-      return { secondary: true }
+      return { $secondary: true }
     default:
       return { disabled: true }
   }

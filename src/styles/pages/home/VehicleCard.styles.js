@@ -55,9 +55,9 @@ const StatusBadge = styled.div`
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 500;
-  background-color: ${({ color }) => color}20;
-  color: ${({ color }) => color};
-  border: 1px solid ${({ color }) => color}40;
+  background-color: ${({ $color }) => $color}20;
+  color: ${({ $color }) => $color};
+  border: 1px solid ${({ $color }) => $color}40;
 `
 
 const TractorDetails = styled.div`
@@ -76,8 +76,8 @@ const ActionButton = styled.button`
   transition: all 0.2s ease;
   border: none;
 
-  ${({ primary, secondary }) => {
-    if (primary) {
+  ${({ $primary, $secondary }) => {
+    if ($primary) {
       return `
         background-color: #10b981;
         color: white;
@@ -86,7 +86,7 @@ const ActionButton = styled.button`
           transform: translateY(-1px);
         }
       `
-    } else if (secondary) {
+    } else if ($secondary) {
       return `
         background-color: #f59e0b;
         color: white;

@@ -32,13 +32,13 @@ const HomePage = () => {
 
       <TractorGrid>
         {vehiclesData.map(vehicle => (
-          <TractorCard key={vehicle.id} available={vehicle.status === 'available'}>
+          <TractorCard key={vehicle.id} $available={vehicle.status === 'available'}>
             <TractorHeader>
               <TractorInfo>
                 <TractorName>{vehicle.name}</TractorName>
                 <TractorModel>Model: {vehicle.model}</TractorModel>
               </TractorInfo>
-              <StatusBadge color={getStatusColor(vehicle.status)}>{getStatusText(vehicle.status)}</StatusBadge>
+              <StatusBadge $color={getStatusColor(vehicle.status)}>{getStatusText(vehicle.status)}</StatusBadge>
             </TractorHeader>
 
             <ActionButton
