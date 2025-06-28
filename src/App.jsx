@@ -4,12 +4,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import HomePage from './pages/HomePage'
 import MapPage from './pages/MapPage'
 
-import GlobalStyles from './components/styles/Global.styles.js'
-import AppContainer from './components/styles/containers/App.styles.js'
-import { Header, HeaderContent, HeaderTitle } from './components/styles/header/Header.styles.js'
-import MainContent from './components/styles/containers/Main.styles.js'
-import ContentCard from './components/styles/containers/ContentCard.styles.js'
-import ErrorContainer from './components/styles/containers/ErrorContainer.styles.js'
+import GlobalStyles from './styles/Global.styles.js'
+import AppContainer from './styles/containers/App.styles.js'
+import { Header, HeaderContent, HeaderTitle } from './styles/header/Header.styles.js'
+import MainContent from './styles/containers/Main.styles.js'
+import ContentCard from './styles/containers/ContentCard.styles.js'
+import ErrorContainer from './styles/containers/ErrorContainer.styles.js'
 
 const queryClient = new QueryClient()
 

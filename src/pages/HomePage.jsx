@@ -1,6 +1,6 @@
 import { useLocation } from 'wouter'
 
-import { Container, Title, Subtitle } from '../components/styles/home/HomePage.styles'
+import { Container, Title, Subtitle } from '../styles/pages/home/HomePage.styles'
 import {
   TractorGrid,
   TractorCard,
@@ -10,7 +10,7 @@ import {
   TractorModel,
   StatusBadge,
   ActionButton
-} from '../components/styles/home/VehicleCard.styles'
+} from '../styles/pages/home/VehicleCard.styles'
 
 import vehiclesData from '../data/vehicles'
 import { getStatusColor, getButtonText, getButtonProps, getStatusText } from '../utils/utils'
