@@ -1,5 +1,6 @@
 import { Router, Route, Switch } from 'wouter'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from 'react-hot-toast'
 
 import HomePage from './pages/HomePage'
 import MapPage from './pages/MapPage'
@@ -36,6 +37,18 @@ function App() {
               </Switch>
             </Router>
           </ContentCard>
+
+          <Toaster
+            toastOptions={{
+              success: {
+                iconTheme: {
+                  primary: 'green',
+                  secondary: 'white'
+                }
+              }
+            }}
+            position='bottom-right'
+          />
         </MainContent>
       </AppContainer>
     </QueryClientProvider>
