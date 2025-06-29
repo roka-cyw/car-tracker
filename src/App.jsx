@@ -30,7 +30,7 @@ function App() {
             <Router>
               <Switch>
                 <Route path='/' component={HomePage} />
-                <Route path='/map/:tractorId?' component={MapPage} />
+                <Route path='/map/:vehicleId/:vehicleName/:vehicleModel' component={MapPage} />
                 <Route>
                   <ErrorContainer>404 - Page not found</ErrorContainer>
                 </Route>

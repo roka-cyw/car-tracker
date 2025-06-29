@@ -1,40 +1,71 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { useLocation, useParams } from 'wouter'
 
 import MapContainer from '../components/MapContainer'
 
-import { Container, MapSection } from '../styles/pages/map/MapPage.styles'
-import type { Vehicle } from '../../types'
-import styled from 'styled-components'
+import { Container, MapSection, BackButton, ActionButton, ErrorMessage } from '../styles/pages/map/MapPage.styles'
 
-const ErrorMessage = styled.div`
-  text-align: center;
-  padding: 2rem;
-  color: #ef4444;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-`
+import useVehicleTracking from '../hooks/useVehicleTracking'
+import vehiclesData from '../data/vehicles'
+import type { Vehicle } from '../../types'
 
 const MapPage = () => {
-  const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null)
+  const { vehicleId } = useParams()
+  const [, setLocation] = useLocation()
   const [vehicle, setVehicle] = useState<Vehicle | null>(null)
+  const { isTracking, startTracking, stopTracking, setMapInstance } = useVehicleTracking(vehicle as Vehicle)
+
+  useEffect(() => {
+    const findVehicle = vehiclesData.find(car => car.id === Number(vehicleId))
+
+    if (findVehicle) {
+      setVehicle(findVehicle as Vehicle)
+      toast.success('Vehicle found')
+    }
+  }, [vehicleId])
 
   const handleMapLoad = (map: mapboxgl.Map) => {
     setMapInstance(map)
     toast.success('Map loaded successfully')
   }
 
-  // if (!vehicle) {
-  //   return (
-  //     <Container>
-  //       <ErrorMessage>Error: Vehicle not found</ErrorMessage>
-  //     </Container>
-  //   )
-  // }
+  const handlePrevPage = () => {
+    setLocation(`/`)
+  }
+
+  if (!vehicle) {
+    return (
+      <Container>
+        <ErrorMessage>
+          Vehicle not found
+          <br />
+          <BackButton onClick={handlePrevPage} style={{ marginTop: '1rem' }}>
+            ← Back to the list
+          </BackButton>
+        </ErrorMessage>
+      </Container>
+    )
+  }
 
   return (
     <Container>
+      <div>
+        {vehicle.status === 'available' && (
+          <>
+            {!isTracking ? (
+              <ActionButton $primary onClick={startTracking}>
+                Start tracking
+              </ActionButton>
+            ) : (
+              <ActionButton $danger onClick={stopTracking}>
+                Stop tracking
+              </ActionButton>
+            )}
+          </>
+        )}
+      </div>
+
       <MapSection>
         <MapContainer vehicle={vehicle} onMapLoad={handleMapLoad} />
       </MapSection>

@@ -20,8 +20,7 @@ const HomePage = () => {
 
   const handleVehicleAction = vehicle => () => {
     if (vehicle.status === 'available' || vehicle.status === 'working') {
-      setLocation(`/map/${vehicle.name}-${vehicle.model}`)
-      // setLocation(`/map/${vehicle.id}`)
+      setLocation(`/map/${vehicle.id}/${vehicle.name}/${vehicle.model}`)
     }
   }
 
