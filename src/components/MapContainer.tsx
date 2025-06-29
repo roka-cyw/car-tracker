@@ -4,13 +4,36 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import { Container, LoadingOverlay, MapWrapper } from '../styles/pages/map/MapContainer.styles'
+import type { Vehicle } from '../../types'
 
-const MapContainer = () => {
+interface Props {
+  vehicle: Vehicle
+  onMapLoad: (map: mapboxgl.Map) => void
+}
+
+const MapContainer = ({ vehicle, onMapLoad }: Props) => {
   const [isMapLoading, setIsMapLoading] = useState(true)
-  const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null)
 
   const mapContainer = useRef<HTMLDivElement | null>(null)
   const map = useRef<mapboxgl.Map | null>(null)
+  const vehicleMark = useRef<mapboxgl.Marker | null>(null)
+
+  const createVehicleMark = () => {
+    if (!map.current) return
+
+    const vehicleElement = document.createElement('div')
+    vehicleElement.innerHTML = '🚗'
+    vehicleElement.style.fontSize = '24px'
+    vehicleElement.style.cursor = 'pointer'
+
+    vehicleMark.current = new mapboxgl.Marker({
+      element: vehicleElement,
+      anchor: 'center'
+    })
+      // .setLngLat(vehicle.coordinates)
+      .setLngLat([-122.41961, 37.76528]) // center of the city
+      .addTo(map.current)
+  }
 
   useEffect(() => {
     const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -24,11 +47,12 @@ const MapContainer = () => {
 
     mapboxgl.accessToken = mapboxToken
 
-    // Created map instance
     map.current = new mapboxgl.Map({
       container: mapContainer.current || '',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-122.45154, 37.74551], // center of the city
+      // center: vehicle.coordinates,
+      center: [-122.41961, 37.76528], // center of the city
+
       zoom: 13,
       pitch: 45,
       bearing: 45
@@ -37,10 +61,14 @@ const MapContainer = () => {
     map.current.on('load', () => {
       setIsMapLoading(false)
 
-      // TODO: create car mark
+      createVehicleMark()
 
-      setMapInstance(map.current)
-      toast.success('Map created')
+      // TODO: set up moving route
+
+      if (onMapLoad && map.current) {
+        onMapLoad(map.current)
+        toast.success('Map created')
+      }
     })
 
     map.current.on('error', err => {
@@ -54,7 +82,8 @@ const MapContainer = () => {
         map.current.remove()
       }
     }
-  }, [])
+  }, [vehicle])
+  // onMapLoad is absent because I have infinite loop
 
   return (
     <Container>

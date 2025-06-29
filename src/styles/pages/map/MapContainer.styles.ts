@@ -5,7 +5,7 @@ const Container = styled.div`
 `
 
 const LoadingOverlay = styled.div`
-  posation: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
