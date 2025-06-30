@@ -4,13 +4,11 @@ import { mockWebSocket } from '../services/mockWebSocket'
 
 import type { Vehicle, GPSData, Coordinates } from '../types'
 
-const useVehicleTracking = (vehicle: Vehicle) => {
+const useVehicleTracking = (vehicle?: Vehicle) => {
   const [isTracking, setIsTracking] = useState(false)
   const [currentPosition, setCurrentPosition] = useState<Coordinates | null>(null)
 
   const handleGPSUpdate = useCallback((data: GPSData) => {
-    console.log('New position', data.coordinates)
-
     setCurrentPosition(data.coordinates)
 
     // Update the map position
@@ -27,8 +25,6 @@ const useVehicleTracking = (vehicle: Vehicle) => {
   const startTracking = useCallback(() => {
     if (!vehicle || isTracking) return
 
-    console.log('Start tracking')
-
     mockWebSocket.subscribe(handleGPSUpdate)
     mockWebSocket.start(vehicle)
 
@@ -36,13 +32,11 @@ const useVehicleTracking = (vehicle: Vehicle) => {
   }, [vehicle, isTracking, handleGPSUpdate])
 
   const stopTracking = useCallback(() => {
-    console.log('Stop tracking')
-
     mockWebSocket.unsubscribe(handleGPSUpdate)
     mockWebSocket.stop()
 
     setIsTracking(false)
-  }, [])
+  }, [handleGPSUpdate])
 
   const setMapInstance = useCallback((mapInstance: mapboxgl.Map) => {
     window.mapInstance = mapInstance

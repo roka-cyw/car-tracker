@@ -29,6 +29,7 @@ const MapPage = () => {
 
   const handlePrevPage = () => {
     setLocation(`/`)
+    stopTracking()
   }
 
   useEffect(() => {

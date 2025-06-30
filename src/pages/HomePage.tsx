@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useLocation } from 'wouter'
 import { useQuery } from '@tanstack/react-query'
 
@@ -5,11 +6,13 @@ import { Container, Title, Subtitle } from '../styles/pages/home/HomePage.styles
 import * as SC from '../styles/pages/home/VehicleCard.styles'
 
 import fetchVehicles from '../api/fetchVehicles'
+import useVehicleTracking from '../hooks/useVehicleTracking'
 import { getStatusColor, getButtonText, getButtonProps, getStatusText } from '../utils/utils'
 import type { Vehicle } from '../types'
 
 const HomePage = () => {
   const [, setLocation] = useLocation()
+  const { stopTracking } = useVehicleTracking()
 
   const { data, isPending, error } = useQuery({
     queryKey: ['vehicles'],
@@ -21,6 +24,10 @@ const HomePage = () => {
       setLocation(`/map/${vehicle.id}/${vehicle.name}/${vehicle.model}`)
     }
   }
+
+  useEffect(() => {
+    stopTracking()
+  }, [stopTracking])
 
   if (isPending) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>

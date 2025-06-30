@@ -30,7 +30,6 @@ class MockWebSocket {
     if (this.isActive) return
 
     toast.success('The car starts moving')
-    console.log('The car starts moving')
 
     this.isActive = true
     this.currentIndex = 0
@@ -54,7 +53,6 @@ class MockWebSocket {
       if (this.currentIndex >= route.length) {
         this.stop()
         toast.success('The car arrives at the destination')
-        console.log('The car stops moving')
       }
     }, 2000)
   }
@@ -63,13 +61,12 @@ class MockWebSocket {
     if (this.intervalId) {
       clearInterval(this.intervalId)
       this.intervalId = null
+
+      toast.success('The car stops moving')
     }
 
     this.isActive = false
     this.currentIndex = 0
-
-    toast.success('The car stops moving')
-    console.log('The car stops moving')
   }
 
   getStatus() {

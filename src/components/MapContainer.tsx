@@ -126,15 +126,11 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
 
   const updateVehiclePosition = (newCoordinates: Coordinates): void => {
     if (vehicleMark.current) {
-      console.log('Update vehicle postions to: ', newCoordinates)
-
       animateVehicle(newCoordinates)
     }
   }
 
   const updateRouteProgress = (currentIndex: number) => {
-    console.log('Update route color')
-
     if (!map.current || currentIndex < 0) return
 
     const completedCoordinates = vehicle.route.slice(0, currentIndex + 1)
@@ -164,8 +160,6 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
     const currentPos = vehicleMark.current.getLngLat()
     const targetPos = newCoordinates
 
-    console.log('Animaion from:', [currentPos.lng, currentPos.lat], 'к:', targetPos)
-
     const duration = 2000
     const steps = 60
     const stepDuration = duration / steps
@@ -186,7 +180,7 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
       if (currentStep < steps) {
         setTimeout(animate, stepDuration)
       } else {
-        console.log('Animation finished')
+        // console.log('Animation finished')
       }
     }
 
