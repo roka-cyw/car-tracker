@@ -44,7 +44,7 @@ const useVehicleTracking = (vehicle: Vehicle) => {
     setIsTracking(false)
   }, [])
 
-  const setMapInstance = useCallback(mapInstance => {
+  const setMapInstance = useCallback((mapInstance: mapboxgl.Map) => {
     window.mapInstance = mapInstance
   }, [])
 
