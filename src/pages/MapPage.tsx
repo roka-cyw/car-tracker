@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useLocation, useParams } from 'wouter'
+import { useQuery } from '@tanstack/react-query'
 
 import MapContainer from '../components/MapContainer'
 
 import { Container, MapSection, BackButton, ActionButton, ErrorMessage } from '../styles/pages/map/MapPage.styles'
 
+import fetchVehicles from '../api/fetchVehicles'
 import useVehicleTracking from '../hooks/useVehicleTracking'
-import vehiclesData from '../data/vehicles'
 import type { Vehicle } from '../types'
 
 const MapPage = () => {
@@ -16,14 +17,10 @@ const MapPage = () => {
   const [vehicle, setVehicle] = useState<Vehicle | null>(null)
   const { isTracking, startTracking, stopTracking, setMapInstance } = useVehicleTracking(vehicle as Vehicle)
 
-  useEffect(() => {
-    const findVehicle = vehiclesData.find(car => car.id === Number(vehicleId))
-
-    if (findVehicle) {
-      setVehicle(findVehicle as Vehicle)
-      toast.success('Vehicle found')
-    }
-  }, [vehicleId])
+  const { data, isPending, error } = useQuery({
+    queryKey: ['vehicles'],
+    queryFn: fetchVehicles
+  })
 
   const handleMapLoad = (map: mapboxgl.Map) => {
     setMapInstance(map)
@@ -33,6 +30,18 @@ const MapPage = () => {
   const handlePrevPage = () => {
     setLocation(`/`)
   }
+
+  useEffect(() => {
+    const findVehicle = data?.find(car => car.id === Number(vehicleId))
+
+    if (findVehicle) {
+      setVehicle(findVehicle as Vehicle)
+      toast.success('Vehicle found')
+    }
+  }, [data, vehicleId])
+
+  if (isPending) return <div>Loading...</div>
+  if (error) return <div>Error: {error.message}</div>
 
   if (!vehicle) {
     return (

@@ -1,5 +1,6 @@
 import { Router, Route, Switch } from 'wouter'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'react-hot-toast'
 
 import HomePage from './pages/HomePage.js'
@@ -51,6 +52,7 @@ function App() {
           />
         </MainContent>
       </AppContainer>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
