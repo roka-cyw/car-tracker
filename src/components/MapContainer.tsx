@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 import { Container, LoadingOverlay, MapWrapper } from '../styles/pages/map/MapContainer.styles'
 
-import type { Vehicle, Coordinates } from '../../types'
+import type { Vehicle, Coordinates, RoutePointMarker } from '../../types'
 
 interface Props {
   vehicle: Vehicle
@@ -18,7 +18,7 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
   const mapContainer = useRef<HTMLDivElement | null>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const vehicleMark = useRef<mapboxgl.Marker | null>(null)
-  const routePointMarkers = useRef<mapboxgl.Marker[]>([])
+  const routePointMarkers = useRef<RoutePointMarker[]>([])
 
   const createVehicleMark = () => {
     if (!map.current || !vehicle) return
@@ -95,6 +95,8 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
 
     routePointMarkers.current = []
     vehicle.route.forEach((point, index) => {
+      if (!map.current) return
+
       const routePoint = document.createElement('div')
       routePoint.style.width = '8px'
       routePoint.style.height = '8px'
@@ -107,7 +109,7 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
         element: routePoint,
         anchor: 'center'
       })
-        .setLngLat(point)
+        .setLngLat(point as [number, number])
         .addTo(map.current)
 
       routePointMarkers.current.push({
@@ -118,7 +120,7 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
     })
 
     const bounds = new mapboxgl.LngLatBounds()
-    vehicle.route.forEach(point => bounds.extend(point))
+    vehicle.route.forEach(point => bounds.extend(point as [number, number]))
     map.current.fitBounds(bounds, { padding: 50, maxZoom: 15 })
   }
 
@@ -130,14 +132,14 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
     }
   }
 
-  const updateRouteProgress = currentIndex => {
+  const updateRouteProgress = (currentIndex: number) => {
     console.log('Update route color')
 
     if (!map.current || currentIndex < 0) return
 
     const completedCoordinates = vehicle.route.slice(0, currentIndex + 1)
 
-    const newRouteSource = map.current.getSource('route-completed')
+    const newRouteSource = map.current.getSource('route-completed') as mapboxgl.GeoJSONSource
     if (newRouteSource) {
       newRouteSource.setData({
         type: 'Feature',
@@ -191,7 +193,7 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
     animate()
 
     map.current.easeTo({
-      center: targetPos,
+      center: targetPos as [number, number],
       duration: duration
     })
   }

@@ -28,6 +28,12 @@ interface ActionButtonProps {
   onClick?: () => void
 }
 
+interface RoutePointMarker {
+  element: HTMLDivElement
+  index: number
+  marker: mapboxgl.Marker
+}
+
 declare module 'mapbox-gl' {
   interface Map {
     updateVehiclePosition?: (coordinates: Coordinates) => void
@@ -44,4 +50,4 @@ declare global {
   }
 }
 
-export type { Vehicle, ActionButtonProps, GPSCallback, GPSData, Coordinates }
+export type { Vehicle, ActionButtonProps, GPSCallback, GPSData, Coordinates, RoutePointMarker }
