@@ -56,25 +56,7 @@ A real-time vehicle tracking application with interactive map visualization and 
 
 ## 🗂️ Project Structure
 
-src/
-├── components/ # Reusable UI components
-│ └── MapContainer.tsx # Main map component
-├── pages/ # Page components
-│ ├── HomePage.tsx # Vehicle list page
-│ └── MapPage.tsx # Vehicle tracking page
-├── hooks/ # Custom React hooks
-│ └── useVehicleTracking.ts
-├── services/ # External services
-│ └── mockWebSocket.ts # GPS simulation
-├── api/ # API and external services
-│ ├── vehicleApi.ts # Data fetching
-├── data/ # Mock data
-│ └── vehicles.ts # Vehicle data
-├── styles/ # Styled components
-│ ├── Global.styles.ts
-│ └── components/ # Component-specific styles
-└── types/ # TypeScript definitions
-└── index.ts
+![alt text](project-structure-for-readme.png)
 
 ## 🌍 Environment Variables
 
