@@ -22,17 +22,17 @@ const vehiclesData = [
     name: 'Toyota Highlander',
     model: 'THH-XLE-AWD',
     status: 'available',
-    location: 'Valencia St & 23rd St',
-    coordinates: [-122.42078, 37.76097], // Valencia St & 23rd St
+    location: 'Capp St & 18th St',
+    coordinates: [-122.42295, 37.76162], // Capp St & 18th St
     batteryLevel: 93,
     lastUpdate: '1 min ago',
     route: [
-      [-122.42078, 37.76097], // Valencia St & 23rd St
-      [-122.41942, 37.76097], // 23rd St & Mission St
-      [-122.41806, 37.76097], // 23rd St & Capp St
-      [-122.4167, 37.76097], // 23rd St & S Van Ness Ave
-      [-122.41534, 37.76097], // 23rd St & Folsom St
-      [-122.41398, 37.76097] // 23rd St & Harrison St
+      [-122.42295, 37.76162], // Capp St & 18th St
+      [-122.42082, 37.76175], // Turn onto Mission St (скрин 2)
+      [-122.42066, 37.76014], // Mission St southbound (скрин 3)
+      [-122.41998, 37.76018], // Turn right onto 21st St (скрин 4)
+      [-122.41922, 37.76024], // Turn at Patrick Hotel area
+      [-122.41937, 37.76183] // Final destination (скрин 6 - финиш)
     ]
   },
   {
