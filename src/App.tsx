@@ -2,7 +2,7 @@ import { Router, Route, Switch } from 'wouter'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
 
-import HomePage from './pages/HomePage'
+import HomePage from './pages/HomePage.js'
 import MapPage from './pages/MapPage'
 
 import GlobalStyles from './styles/Global.styles.js'

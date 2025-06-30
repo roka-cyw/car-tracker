@@ -14,11 +14,12 @@ import {
 
 import vehiclesData from '../data/vehicles'
 import { getStatusColor, getButtonText, getButtonProps, getStatusText } from '../utils/utils'
+import type { Vehicle } from '../../types'
 
 const HomePage = () => {
   const [, setLocation] = useLocation()
 
-  const handleVehicleAction = vehicle => () => {
+  const handleVehicleAction = (vehicle: Vehicle) => () => {
     if (vehicle.status === 'available' || vehicle.status === 'working') {
       setLocation(`/map/${vehicle.id}/${vehicle.name}/${vehicle.model}`)
     }
@@ -42,7 +43,7 @@ const HomePage = () => {
 
             <ActionButton
               {...getButtonProps(vehicle.status)}
-              onClick={handleVehicleAction(vehicle)}
+              onClick={handleVehicleAction(vehicle as Vehicle)}
               disabled={vehicle.status === 'Unavailable'}
             >
               {getButtonText(vehicle.status)}

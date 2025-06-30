@@ -11,7 +11,7 @@ export const getStatusColor = status => {
   }
 }
 
-export const getStatusText = status => {
+export const getStatusText = (status: string) => {
   switch (status) {
     case 'available':
       return 'Available'
@@ -24,7 +24,7 @@ export const getStatusText = status => {
   }
 }
 
-export const getButtonText = status => {
+export const getButtonText = (status: string) => {
   switch (status) {
     case 'available':
       return '🚕 Pick the car'
@@ -37,7 +37,7 @@ export const getButtonText = status => {
   }
 }
 
-export const getButtonProps = status => {
+export const getButtonProps = (status: string) => {
   switch (status) {
     case 'available':
       return { $primary: true }
