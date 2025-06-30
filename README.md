@@ -1,69 +1,102 @@
-# React + TypeScript + Vite
+# 🚗 Car Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time vehicle tracking application with interactive map visualization and GPS simulation.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **[View Live Application](https://car-tracker-app-beta.vercel.app/)**
 
-## Expanding the ESLint configuration
+## 🌟 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Interactive Map**: Real-time vehicle tracking on Mapbox GL JS
+- **GPS Simulation**: Mock WebSocket connection simulating GPS data streams
+- **Route Visualization**: Dynamic route rendering with progress tracking
+- **Real-time Updates**: Live position updates with smooth animations
+- **Vehicle Management**: Browse available vehicles and track their status
+- **Responsive Design**: Mobile-friendly interface with modern UI
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Frontend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React 19** - Modern React with latest features
+- **TypeScript** - Type-safe development
+- **Styled Components** - CSS-in-JS styling solution
+- **Vite** - Fast build tool and dev server
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### State Management & Data
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **TanStack Query** - Server state management and caching
+- **React Hot Toast** - Beautiful notifications
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Maps & Real-time
+
+- **Mapbox GL JS** - Interactive maps and geospatial data
+- **Socket.io Client** - WebSocket simulation for real-time updates
+- **Custom WebSocket Mock** - GPS data simulation
+- **Get Route steps** - [GPS data simulation](https://nominatim.openstreetmap.org/ui/search.html)
+
+### Routing
+
+- **Wouter** - Lightweight React router
+
+## 🏃‍♂️ Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- Mapbox API Token
+
+## 🔧 Available Scripts
+
+- npm run dev - Start development server
+- npm run build - Build for production
+- npm run preview - Preview production build
+- npm run lint - Run ESLint
+
+## 🗂️ Project Structure
+
+src/
+├── components/ # Reusable UI components
+│ └── MapContainer.tsx # Main map component
+├── pages/ # Page components
+│ ├── HomePage.tsx # Vehicle list page
+│ └── MapPage.tsx # Vehicle tracking page
+├── hooks/ # Custom React hooks
+│ └── useVehicleTracking.ts
+├── services/ # External services
+│ └── mockWebSocket.ts # GPS simulation
+├── api/ # API and external services
+│ ├── vehicleApi.ts # Data fetching
+├── data/ # Mock data
+│ └── vehicles.ts # Vehicle data
+├── styles/ # Styled components
+│ ├── Global.styles.ts
+│ └── components/ # Component-specific styles
+└── types/ # TypeScript definitions
+└── index.ts
+
+## 🌍 Environment Variables
+
+VITE_MAPBOX_TOKEN=your_mapbox_access_token
+
+## 🎯 Key Features Explained
+
+### Real-time GPS Simulation
+
+- Mock WebSocket connection simulates GPS data every 2 seconds
+- Smooth vehicle movement animations between route points
+- Progress tracking with visual indicators
+
+### Interactive Map Features
+
+- Vehicle markers with status information
+- Route visualization with completed/remaining segments
+- Dynamic map centering and zoom controls
+
+### Vehicle Status Management
+
+- Available, Working, Unavailable states
+- Battery level monitoring
+- Last update timestamps
+- Task assignment capabilities
