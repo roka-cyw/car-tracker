@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import type { ActionButtonProps, StatusBadgeProps, VehicleCardProps } from '../../../types/style'
+import type { ActionButtonProps, StatusBadgeProps, VehicleCardProps, BatteryLevelProps } from '../../../types/style'
 
 const VehicleGrid = styled.div`
   display: grid;
@@ -13,6 +13,10 @@ const VehicleGrid = styled.div`
 `
 
 const VehicleCard = styled.div<VehicleCardProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
@@ -62,10 +66,36 @@ const StatusBadge = styled.div<StatusBadgeProps>`
   border: 1px solid ${({ $color }) => $color}40;
 `
 
-const TractorDetails = styled.div`
+const VehicleDetails = styled.div`
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
   color: #4b5563;
+`
+
+const DetailRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  &last-child {
+    margin-bottom: 0;
+  }
+`
+
+const BatteryBar = styled.div`
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+`
+
+const BatteryLevel = styled.div<BatteryLevelProps>`
+  width: ${({ $level }) => $level}%;
+  height: 100%;
+  background: ${({ $level }) => ($level > 50 ? '#10b981' : $level > 20 ? '#f59e0b' : '#ef4444')};
 `
 
 const ActionButton = styled.button<ActionButtonProps>`
@@ -77,6 +107,7 @@ const ActionButton = styled.button<ActionButtonProps>`
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
+  margin-top: auto;
 
   ${({ $primary, $secondary }) => {
     if ($primary) {
@@ -115,6 +146,9 @@ export {
   VehicleName,
   VehicleModel,
   StatusBadge,
-  TractorDetails,
+  VehicleDetails,
+  DetailRow,
+  BatteryBar,
+  BatteryLevel,
   ActionButton
 }

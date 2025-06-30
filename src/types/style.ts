@@ -15,4 +15,8 @@ interface VehicleCardProps {
   $available: boolean
 }
 
-export type { ActionButtonProps, StatusBadgeProps, VehicleCardProps }
+interface BatteryLevelProps {
+  $level: number
+}
+
+export type { ActionButtonProps, StatusBadgeProps, VehicleCardProps, BatteryLevelProps }

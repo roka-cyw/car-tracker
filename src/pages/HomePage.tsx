@@ -10,6 +10,10 @@ import {
   VehicleName,
   VehicleModel,
   StatusBadge,
+  VehicleDetails,
+  DetailRow,
+  BatteryBar,
+  BatteryLevel,
   ActionButton
 } from '../styles/pages/home/VehicleCard.styles'
 
@@ -49,6 +53,49 @@ const HomePage = () => {
               </VehicleInfo>
               <StatusBadge $color={getStatusColor(vehicle.status)}>{getStatusText(vehicle.status)}</StatusBadge>
             </VehicleHeader>
+
+            <VehicleDetails>
+              <DetailRow>
+                <span>📍Location</span>
+                <span>{vehicle.location}</span>
+              </DetailRow>
+
+              <DetailRow>
+                <span>🔋Battery level</span>
+                <span>{vehicle.batteryLevel}%</span>
+              </DetailRow>
+
+              <BatteryBar>
+                <BatteryLevel $level={vehicle.batteryLevel} />
+              </BatteryBar>
+
+              <DetailRow>
+                <span>🕒 Last update:</span>
+                <span>{vehicle.lastUpdate}</span>
+              </DetailRow>
+
+              {vehicle.status === 'working' && (
+                <>
+                  <DetailRow>
+                    <span>⚙️ Current task:</span>
+                    <span>{vehicle.currentTask}</span>
+                  </DetailRow>
+                  <DetailRow>
+                    <span>⏱️Completion time:</span>
+                    <span>{vehicle.estimatedCompletion}</span>
+                  </DetailRow>
+                </>
+              )}
+
+              {vehicle.status === 'unavailable' && (
+                <>
+                  <DetailRow>
+                    <span>🚨 Reason:</span>
+                    <span>{vehicle.reason}</span>
+                  </DetailRow>
+                </>
+              )}
+            </VehicleDetails>
 
             <ActionButton
               {...getButtonProps(vehicle.status)}
