@@ -18,6 +18,7 @@ interface Vehicle {
   batteryLevel: number
   lastUpdate: string
   route: number[][]
+  currentTask?: string
 }
 
 interface RoutePointMarker {

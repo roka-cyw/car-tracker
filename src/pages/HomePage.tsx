@@ -2,20 +2,7 @@ import { useLocation } from 'wouter'
 import { useQuery } from '@tanstack/react-query'
 
 import { Container, Title, Subtitle } from '../styles/pages/home/HomePage.styles'
-import {
-  VehicleGrid,
-  VehicleCard,
-  VehicleHeader,
-  VehicleInfo,
-  VehicleName,
-  VehicleModel,
-  StatusBadge,
-  VehicleDetails,
-  DetailRow,
-  BatteryBar,
-  BatteryLevel,
-  ActionButton
-} from '../styles/pages/home/VehicleCard.styles'
+import * as SC from '../styles/pages/home/VehicleCard.styles'
 
 import fetchVehicles from '../api/fetchVehicles'
 import { getStatusColor, getButtonText, getButtonProps, getStatusText } from '../utils/utils'
@@ -43,70 +30,70 @@ const HomePage = () => {
       <Title>Car's list</Title>
       <Subtitle>Select available car for tracking</Subtitle>
 
-      <VehicleGrid>
+      <SC.VehicleGrid>
         {data.map(vehicle => (
-          <VehicleCard key={vehicle.id} $available={vehicle.status === 'available'}>
-            <VehicleHeader>
-              <VehicleInfo>
-                <VehicleName>{vehicle.name}</VehicleName>
-                <VehicleModel>Model: {vehicle.model}</VehicleModel>
-              </VehicleInfo>
-              <StatusBadge $color={getStatusColor(vehicle.status)}>{getStatusText(vehicle.status)}</StatusBadge>
-            </VehicleHeader>
+          <SC.VehicleCard key={vehicle.id} $available={vehicle.status === 'available'}>
+            <SC.VehicleHeader>
+              <SC.VehicleInfo>
+                <SC.VehicleName>{vehicle.name}</SC.VehicleName>
+                <SC.VehicleModel>Model: {vehicle.model}</SC.VehicleModel>
+              </SC.VehicleInfo>
+              <SC.StatusBadge $color={getStatusColor(vehicle.status)}>{getStatusText(vehicle.status)}</SC.StatusBadge>
+            </SC.VehicleHeader>
 
-            <VehicleDetails>
-              <DetailRow>
+            <SC.VehicleDetails>
+              <SC.DetailRow>
                 <span>📍Location</span>
                 <span>{vehicle.location}</span>
-              </DetailRow>
+              </SC.DetailRow>
 
-              <DetailRow>
+              <SC.DetailRow>
                 <span>🔋Battery level</span>
                 <span>{vehicle.batteryLevel}%</span>
-              </DetailRow>
+              </SC.DetailRow>
 
-              <BatteryBar>
-                <BatteryLevel $level={vehicle.batteryLevel} />
-              </BatteryBar>
+              <SC.BatteryBar>
+                <SC.BatteryLevel $level={vehicle.batteryLevel} />
+              </SC.BatteryBar>
 
-              <DetailRow>
+              <SC.DetailRow>
                 <span>🕒 Last update:</span>
                 <span>{vehicle.lastUpdate}</span>
-              </DetailRow>
+              </SC.DetailRow>
 
               {vehicle.status === 'working' && (
                 <>
-                  <DetailRow>
+                  <SC.DetailRow>
                     <span>⚙️ Current task:</span>
                     <span>{vehicle.currentTask}</span>
-                  </DetailRow>
-                  <DetailRow>
+                  </SC.DetailRow>
+                  <SC.DetailRow>
                     <span>⏱️Completion time:</span>
                     <span>{vehicle.estimatedCompletion}</span>
-                  </DetailRow>
+                  </SC.DetailRow>
                 </>
               )}
 
               {vehicle.status === 'unavailable' && (
                 <>
-                  <DetailRow>
+                  <SC.DetailRow>
                     <span>🚨 Reason:</span>
                     <span>{vehicle.reason}</span>
-                  </DetailRow>
+                  </SC.DetailRow>
                 </>
               )}
-            </VehicleDetails>
+            </SC.VehicleDetails>
 
-            <ActionButton
+            <SC.ActionButton
               {...getButtonProps(vehicle.status)}
               onClick={handleVehicleAction(vehicle as Vehicle)}
               disabled={vehicle.status === 'Unavailable'}
             >
               {getButtonText(vehicle.status)}
-            </ActionButton>
-          </VehicleCard>
+            </SC.ActionButton>
+          </SC.VehicleCard>
         ))}
-      </VehicleGrid>
+      </SC.VehicleGrid>
     </Container>
   )
 }
