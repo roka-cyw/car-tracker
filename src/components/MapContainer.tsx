@@ -39,7 +39,7 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
   const createCarRoute = () => {
     if (!map.current) return
 
-    map.current.addSource('route', {
+    map.current.addSource('route-full', {
       type: 'geojson',
       data: {
         type: 'Feature',
@@ -51,10 +51,22 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
       }
     })
 
+    map.current.addSource('route-completed', {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: []
+        }
+      }
+    })
+
     map.current.addLayer({
-      id: 'route',
+      id: 'route-full',
       type: 'line',
-      source: 'route',
+      source: 'route-full',
       layout: {
         'line-join': 'round',
         'line-cap': 'round'
@@ -63,6 +75,21 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
         'line-color': '#10b981',
         'line-width': 4,
         'line-opacity': 0.7
+      }
+    })
+
+    map.current.addLayer({
+      id: 'route-completed',
+      type: 'line',
+      source: 'route-completed',
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#0000FF',
+        'line-width': 4,
+        'line-opacity': 1
       }
     })
 
@@ -103,10 +130,30 @@ const MapContainer = ({ vehicle, onMapLoad }: Props) => {
     }
   }
 
-  const updateRouteProgress = () => {
+  const updateRouteProgress = currentIndex => {
     console.log('Update route color')
 
-    // TODO: update route color after reached point
+    if (!map.current || currentIndex < 0) return
+
+    const completedCoordinates = vehicle.route.slice(0, currentIndex + 1)
+
+    const newRouteSource = map.current.getSource('route-completed')
+    if (newRouteSource) {
+      newRouteSource.setData({
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: completedCoordinates
+        }
+      })
+    }
+
+    routePointMarkers.current.forEach(({ element, index }) => {
+      if (index <= currentIndex) {
+        element.style.backgroundColor = '#0000FF'
+      }
+    })
   }
 
   const animateVehicle = (newCoordinates: Coordinates): void => {
