@@ -20,14 +20,6 @@ interface Vehicle {
   route: number[][]
 }
 
-interface ActionButtonProps {
-  $primary?: boolean
-  $danger?: boolean
-  disabled?: boolean
-  children: React.ReactNode
-  onClick?: () => void
-}
-
 interface RoutePointMarker {
   element: HTMLDivElement
   index: number
@@ -50,4 +42,4 @@ declare global {
   }
 }
 
-export type { Vehicle, ActionButtonProps, GPSCallback, GPSData, Coordinates, RoutePointMarker }
+export type { Vehicle, GPSCallback, GPSData, Coordinates, RoutePointMarker }

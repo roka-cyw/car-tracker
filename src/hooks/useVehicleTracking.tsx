@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 
 import { mockWebSocket } from '../services/mockWebSocket'
 
-import type { Vehicle, GPSData, Coordinates } from '../../types'
+import type { Vehicle, GPSData, Coordinates } from '../types'
 
 const useVehicleTracking = (vehicle: Vehicle) => {
   const [isTracking, setIsTracking] = useState(false)

@@ -8,7 +8,7 @@ import { Container, MapSection, BackButton, ActionButton, ErrorMessage } from '.
 
 import useVehicleTracking from '../hooks/useVehicleTracking'
 import vehiclesData from '../data/vehicles'
-import type { Vehicle } from '../../types'
+import type { Vehicle } from '../types'
 
 const MapPage = () => {
   const { vehicleId } = useParams()

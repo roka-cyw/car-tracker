@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 import { Container, LoadingOverlay, MapWrapper } from '../styles/pages/map/MapContainer.styles'
 
-import type { Vehicle, Coordinates, RoutePointMarker } from '../../types'
+import type { Vehicle, Coordinates, RoutePointMarker } from '../types'
 
 interface Props {
   vehicle: Vehicle

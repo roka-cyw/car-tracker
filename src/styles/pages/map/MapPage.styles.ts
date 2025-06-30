@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import type { ActionButtonProps } from '../../../../types'
+import type { ActionButtonProps } from '../../../types/style'
 
 const Container = styled.div`
   max-width: 1200px;

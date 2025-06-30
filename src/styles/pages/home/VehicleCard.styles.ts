@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import type { ActionButtonProps, StatusBadgeProps, VehicleCardProps } from '../../../types/style'
+
 const VehicleGrid = styled.div`
   display: grid;
   gap: 1.5rem;
@@ -10,7 +12,7 @@ const VehicleGrid = styled.div`
   }
 `
 
-const VehicleCard = styled.div`
+const VehicleCard = styled.div<VehicleCardProps>`
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
@@ -20,7 +22,7 @@ const VehicleCard = styled.div`
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border-color: ${({ available }) => (available ? '#10b981' : '#e5e7eb')};
+    border-color: ${({ $available }) => ($available ? '#10b981' : '#e5e7eb')};
   }
 `
 
@@ -48,7 +50,7 @@ const VehicleModel = styled.p`
   margin: 0;
 `
 
-const StatusBadge = styled.div`
+const StatusBadge = styled.div<StatusBadgeProps>`
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
@@ -66,7 +68,7 @@ const TractorDetails = styled.div`
   color: #4b5563;
 `
 
-const ActionButton = styled.button`
+const ActionButton = styled.button<ActionButtonProps>`
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 8px;

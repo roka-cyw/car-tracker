@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 
-import type { GPSCallback, Vehicle } from '../../types'
+import type { GPSCallback, Vehicle } from '../types'
 
 class MockWebSocket {
   isActive: boolean

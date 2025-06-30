@@ -1,4 +1,4 @@
-export const getStatusColor = status => {
+export const getStatusColor = (status: string) => {
   switch (status) {
     case 'available':
       return '#10b981' // green

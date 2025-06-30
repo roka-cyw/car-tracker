@@ -14,7 +14,7 @@ import {
 
 import vehiclesData from '../data/vehicles'
 import { getStatusColor, getButtonText, getButtonProps, getStatusText } from '../utils/utils'
-import type { Vehicle } from '../../types'
+import type { Vehicle } from '../types'
 
 const HomePage = () => {
   const [, setLocation] = useLocation()
